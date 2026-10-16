@@ -47,4 +47,7 @@ The authentication events are simulated. The queries demonstrate detection and i
 - Test the detection against real lab events.
 - Configure and validate a Microsoft Sentinel analytics rule.
 
-
+## Project Screenshots
+1. Failed Login Detection Query
+2. Failed Login Detection Results
+3. Investigation Timeline
