@@ -1,64 +1,50 @@
 # SOC Lab: Failed Login Detection and Investigation
 
 ## Project Overview
+This project demonstrates how to use Kusto Query Language (KQL) to detect and investigate repeated failed login attempts.
 
-This project demonstrates how to use Kusto Query Language (KQL) to identify and investigate repeated failed login attempts.
-
-The lab was built using Microsoft Azure, Azure Log Analytics and Microsoft Sentinel. Simulated authentication events were used to practise detection and investigation techniques without connecting a live security data source.
-
-## Objectives
-
-- Write KQL queries to analyse authentication events.
-- Detect repeated failed login attempts.
-- Investigate login patterns and identify a subsequent successful login.
-- Document findings and recommend appropriate security investigation steps.
+I used Azure Log Analytics and Microsoft Sentinel to practise security monitoring and investigation techniques with simulated authentication events.
 
 ## Tools Used
-
-- Microsoft Sentinel
+- Microsoft Azure
 - Azure Log Analytics
+- Microsoft Sentinel
 - Kusto Query Language (KQL)
 - GitHub
 
 ## Detection Scenario
+The simulated dataset contains five failed login attempts for the user `john` from IP address `192.0.2.10`, followed by a successful login.
 
-The simulated dataset contains five failed login attempts for the user `john`, originating from `192.0.2.10`, followed by a successful login.
-
-A KQL query identifies users and IP addresses associated with five or more failed attempts.
+A KQL query identifies users and IP addresses with five or more failed login attempts.
 
 ## Investigation Findings
+- **User:** john
+- **Source IP:** 192.0.2.10
+- **Failed attempts:** 5
+- **First failed attempt:** 09:00
+- **Last failed attempt:** 09:04
+- **Subsequent successful login:** 09:05
 
-- User: `john`
-- Source IP: `192.0.2.10`
-- Failed login attempts: 5
-- First failed attempt: 09:00
-- Last failed attempt: 09:04
-- Subsequent successful login: 09:05
+This pattern may indicate repeated incorrect passwords or a possible brute-force attempt. It does not, by itself, confirm that the account was compromised.
 
-The pattern warrants further investigation but does not, by itself, prove that the account was compromised.
-
-## Recommended Investigation Steps
-
-1. Verify whether the successful login was legitimate.
-2. Review authentication records and available device or location information.
-3. Look for other suspicious activity associated with the account.
-4. Escalate suspected compromise according to the organisation's incident response procedures.
+## Repository Files
+- `detection.kql` — identifies repeated failed login attempts.
+- `investigation.kql` — reviews the authentication event timeline.
+- `incident-report.md` — documents findings and recommended actions.
 
 ## Limitations
-
-All events in this project are simulated. The queries demonstrate detection logic but do not represent real attacks or real security incidents. No automated Microsoft Sentinel analytics rule or live alert was configured as part of this exercise.
+The authentication events are simulated. The queries demonstrate detection and investigation logic but are not connected to live logs and do not generate automated Sentinel alerts.
 
 ## Skills Demonstrated
-
-- KQL query development
+- KQL query writing
 - Authentication log analysis
-- Detection logic
-- Security incident investigation
-- Technical documentation
+- Failed-login detection
+- Security investigation
+- Incident reporting and documentation
 
 ## Future Improvements
-
-- Connect a suitable live security log source.
+- Connect a suitable live log source.
 - Test the detection against real lab events.
-- Develop and validate a Microsoft Sentinel analytics rule.
-- Explore alert investigation and incident response workflows.
+- Configure and validate a Microsoft Sentinel analytics rule.
+
+
