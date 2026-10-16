@@ -1,0 +1,19 @@
+let LoginEvents = datatable(
+    TimeGenerated:datetime,
+    User:string,
+    IPAddress:string,
+    Result:string
+)
+[
+    datetime(2026-10-16 09:00:00), "john", "192.0.2.10", "Failed",
+    datetime(2026-10-16 09:01:00), "john", "192.0.2.10", "Failed",
+    datetime(2026-10-16 09:02:00), "john", "192.0.2.10", "Failed",
+    datetime(2026-10-16 09:03:00), "john", "192.0.2.10", "Failed",
+    datetime(2026-10-16 09:04:00), "john", "192.0.2.10", "Failed",
+    datetime(2026-10-16 09:05:00), "john", "192.0.2.10", "Success",
+    datetime(2026-10-16 09:06:00), "mary", "192.0.2.20", "Success"
+];
+LoginEvents
+| where Result == "Failed"
+| summarize FailedAttempts = count() by User, IPAddress
+| where FailedAttempts >= 5
